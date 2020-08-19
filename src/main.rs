@@ -33,6 +33,18 @@ fn test() -> &'static str {
     "Written"
 }
 
+#[get("/add/<val>")]
+fn add(val: u8) -> &'static str {
+    println!("add: {}", val);
+    DB.lock()
+        .expect("Could not lock on DB")
+        .append_record_now(val)
+        .expect("Could not write record");
+    "ok"
+}
+
 fn main() {
-    rocket::ignite().mount("/", routes![index, test]).launch();
+    rocket::ignite()
+        .mount("/", routes![index, test, add])
+        .launch();
 }

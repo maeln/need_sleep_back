@@ -13,5 +13,5 @@ description = "A backend for NEED SLEEP a sleep tracker."
 
 [dependencies]
 rocket = "0.4.5"
-tslite = "0.1.3"
+tslite = { path = "../tslite" }
 lazy_static = "1.4.0"
